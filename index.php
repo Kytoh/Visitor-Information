@@ -1,3 +1,11 @@
+<?php
+ini_set('DISPLAY_ERRORS',0);
+$country = include 'https://rawgit.com/Kytoh/PublicFunctions/master/country_list.php';
+
+$enlace = mysqli_connect('localhost','root','mysql','visitor');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,108 +16,94 @@
     <meta name="author" content="KevinCalaSanchez at kevincala.com">
     <meta name="generator" content="HardCoded">
 
-    <title>Meeting Visitor Information</title>
+    <title>Management</title>
 
     <!-- Bootstrap Core /css -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/interi.css" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
-    <!-- HTML5 Shim and Respond./js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond./js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <!-- Compiled and minified JavaScript -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
 </head>
-
+<!--  -->
 <body style="background: #DFDFFF;color:#000000" >
-    <nav>
-    	<div>
-    		<a class="navbar-brand" href="http://www.kevincala.com" target="_blank">Request More Info</a>	
+	<nav>
+    	<div class="nav-wrapper container">
+				Powering Business
+				<a href="http://www.kevincala.com" class="center brand-logo"><img src="images/logo.png" class="responsive-img" style="height:64px;"></a>
+    			<ul class="right hide-on-med-and-down">
+					<li><a href="http://www.kevincala.com">KevinCala.Com</a></li>
+					<li><a href="https://github.com/Kytoh/Visitor-Information">Info about this tool</a></li>
+    			</ul>
     	</div>
     </nav>
 
     <!-- Page Content -->
-    <div style="clear:both" class="container texts">
+    <div style="clear:both" class="container">
 		
-<?php
-$enlace = mysqli_connect('192.168.140.1', "database", "user", "password");
-	if($_POST){
-		if (mysqli_connect_errno())
-		{
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
-	mysqli_query($enlace, 'INSERT INTO empresas VALUES(null,"'.$_POST['empresa_nombre'].'","'.$_POST['empresa_direccion'].'","'.$_POST['empresa_poblacion'].'","'.$_POST['empresa_telefono'].'","'.$_POST['empresa_web'].'","'.$_POST['empresa_cpostal'].'","'.$_POST['persona_nombre'].'","'.$_POST['persona_apellidos'].'","'.$_POST['persona_cargo'].'","'.$_POST['persona_comentarios'].'","'.$_POST['persona_email'].'")');
-	echo 'Thanks for add your information. We will contact you as soon as possible.<br/><br/><br/>';
-	}
-?>
+
 	To contact you, we need the next data.
-	<form action="" method="post" id="form">
-		<div id="formulario">
-			<div>
-				Company Name<span class="reddot">*</span>
-				<br/><input type="text" name="empresa_nombre" />
-			</div>
-			<div>
-				Your Name<span class="reddot">*</span>
-				<br/><input type="text" name="persona_nombre" />
-			</div>
-			<div>
-				Your Surname<span class="reddot">*</span>
-				<br/><input type="text" name="persona_apellidos" />
-			</div>
-			<div>
-				Company Position
-				<br/><input type="text" name="persona_cargo" />
-			</div>
-			<div>
-				Address
-				<br/><input type="text" name="empresa_direccion" />
-			</div>
-			<div>
-				Poblaci&oacute;n<span class="reddot">*</span>
-				<br/><input type="text" name="empresa_poblacion" />
-			</div>
-			<div>
-				Postal Code
-				<br/><input type="text" name="empresa_cpostal" />
-			</div>
-			<div>
-				Mail<span class="reddot">*</span>
-				<br/><input type="email" name="persona_email" />
-			</div>
-			<div>
-				Tel&eacute;fono<span class="reddot">*</span>
-				<br/><input type="tel" name="empresa_telefono" />
-			</div>
-			<div>
-				Company WWW
-				<br/><input type="url" name="empresa_web" />
-			</div>
-			<div class="clearLines">
-				Other intertesting information
-				<br/><textarea class="txtarea" size="3" name="persona_comentarios" ></textarea>
-			</div>
-			<div class="clearLines">
-				The fields marked with a <span class="reddot">*</span> are required fields to contact correctly with you.
-			</div>
-		</div>
-    </div>
-		
-	<br/>
+	
+	<div class="row">
+    <form class="col s12">
+      <div class="row">
+      <h5>Company Data</h5>
+        <div class="input-field col s12 m6">
+          <input id="business_name" type="text" class="validate" required>
+          <label for="business_name">Company Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="ceoname" type="text" class="validate">
+          <label for="ceoname">CEO Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="business_city" type="text" class="validate" required>
+          <label for="business_city">City</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <select id="business_country" class="icons">
+          <option value="" disabled selected>Choose your option</option>
+          <?php foreach ($country as $ky => $name){
+          	echo '<option value="'.$ky.'" data-icon="images/flags/'.$ky.'.png" class="circle left">'.$name."</option>\n";
+          }?>
+          </select>
+          <label for="business_country">Country</label>
+        </div>
+      </div>
+      <div class="row">
+      <h5>Personal Information</h5>
+        <div class="input-field col s12">
+          <input id="fullname" type="text" class="validate" required>
+          <label for="fullname">Full Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="phone" type="tel" class="validate" required>
+          <label for="phone">Contact Phone</label>
+        </div>
+        <div class="input-field col s12 m8">
+          <input id="email" type="email" class="validate">
+          <label for="email">Contact Email</label>
+        </div>
+      </div>
+      <button onclick="document.getElementById('form').submit()" type="button" class="btn btn-primary s12">Send my Information</button><br/>
+    </form>
+  </div>
+        
+	
+	</div>
     <!-- /.container -->
 	<footer>
 		<div>
-			<button onclick="document.getElementById('form').submit()" type="button" class="btn btn-primary" style="width:80%;margin:auto">Send my Information</button><br/>
+			
 		</div>
 	</footer>
 
-    <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 </body>
-
+<script> $(document).ready(function() {
+    $('select').material_select();
+});</script>
 </html>
