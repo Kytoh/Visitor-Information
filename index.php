@@ -127,5 +127,5 @@ $(document).ready(function() {
 });
 
 function contact(){$('ul.tabs').tabs('select_tab', 'contact');}</script>
-}
+
 </html>
