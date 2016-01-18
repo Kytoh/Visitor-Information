@@ -1,8 +1,7 @@
 <?php
+$base_path = __DIR__.'/';
 ini_set ( 'DISPLAY_ERRORS', 0 );
-$country = include 'https://rawgit.com/Kytoh/PublicFunctions/master/country_list.php';
-
-$enlace = mysqli_connect ( 'localhost', 'root', 'mysql', 'visitor' );
+include 'private/include.php';
 
 ?>
 
