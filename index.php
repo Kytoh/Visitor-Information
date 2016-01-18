@@ -1,8 +1,6 @@
 <?php
-$base_path = __DIR__.'/';
 ini_set ( 'DISPLAY_ERRORS', 0 );
 include 'private/include.php';
-
 ?>
 
 <!DOCTYPE html>

@@ -1,3 +1,3 @@
 <?php
-$enlace = mysqli_connect ( 'localhost', 'root', 'mysql', 'visitor' );
+$db = new mysqli ( 'localhost', 'root', 'mysql', 'visitor' );
 ?>
